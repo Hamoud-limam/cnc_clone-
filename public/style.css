@@ -1,0 +1,289 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.dropdown-btn {
+  background-color: green;
+  color: white;
+  border: none;
+  margin: 0 0 0px 10px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  background-color: #fff;
+  min-width: 160px;
+  z-index: 1000; /* Changed from 18969696966 */
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #faf2f2;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  z-index: 1000; /* Changed from 100000 */
+}
+
+.dropdown:hover .dropdown-btn {
+  background-color: #b5ffb9;
+}
+
+.menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1000; /* Changed from 1098889990 */
+}
+
+.menu-btn:focus {
+  outline: none;
+}
+
+.menu-btn div {
+  width: 30px;
+  height: 3px;
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+.menu-btn .line1 {
+  transform: rotate(0);
+}
+
+.menu-btn .line2 {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu-btn .line3 {
+  transform: rotate(0);
+}
+
+.menu-btn.open .line1 {
+  transform: rotate(45deg);
+}
+
+.menu-btn.open .line2 {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.menu-btn.open .line3 {
+  transform: rotate(-45deg);
+}
+
+.nav-links {
+  display: block;
+  height: 100vh;
+  width: 50%;
+  transform: translateX(200%);
+  transition: transform 0.2s ease-in;
+  background: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Changed from 293030 */
+}
+
+.nav-links li {
+  list-style: none;
+  margin: 20px;
+  position: relative;
+  top: 50px;
+  z-index: 1;
+}
+
+.nav-links a {
+  color: black;
+  font-size: 16px;
+  text-decoration: none;
+  transition: .3s;
+}
+
+.nav-active {
+  transform: translateX(100%);
+}
+
+main {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background-color: white;
+  margin: 40px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: orange;
+  color: white;
+  border: none;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+a {
+  display: block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: gray;
+}
+
+footer {
+  text-align: center;
+  position: relative;
+  top: 50px;
+  color: gray;
+  font-size: small;
+}
+
+img {
+  width: 100%;
+}
+
+@media only screen and (min-width: 900px) {
+  .menu-btn {
+      display: none;
+  }
+  
+  .nav-links {
+      display: flex;
+      width: 50%;
+      height: 0;
+      transform: translateX(0%);
+      transition: transform 0.5s ease-in;
+      position: static;
+      z-index: 0;
+  }
+  
+  .nav-links a:hover {
+      background: gray;
+      padding: 10px;
+  }
+  
+  .nav-links ul {
+      display: none;
+      width: 100%;
+  }
+  
+  .pc-links {
+      display: flex;
+      margin: 20px;
+      padding: 10px;
+      border-radius: 10px;
+      background: green;
+      list-style: none;
+  }
+  
+  .pc-links a {
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+      margin: 10px;
+      white-space: nowrap;
+  }
+
+  .dropdown-content {
+      display: none;
+      background-color: green;
+      position: absolute;
+      min-width: 160px;
+      z-index: 1000; /* Changed from 18969696966 */
+  }
+}
+
+contain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  background-color: #f5f5f5;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+contain a {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  color: white;
+  background-color: #0bd715;
+}
+
+@media (max-width: 900px) {
+  header {
+      background-color: green;
+      padding: 5px;
+      border-radius: 10px;
+      margin: 10px;
+  }
+  
+  .menu-btn {
+      display: flex;
+      margin: 10px;
+  }
+  
+  .pc-links {
+      display: none;
+  }
+  
+  .dropdown-btn {
+      background-color: green;
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+  }
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>recu</title>
+    <link rel="stylesheet" href="depose.css">
+</head>
+<body onload="window.print()">
+
+<img src="header.png" alt="">
+<center>
+    <div class="concour">
+        councour name : <%= concour %>
+   
+    
+<table>
+  
+    <tr>
+      <td> Name :</td>
+      <td> <%= user.username %></td>
+    </tr>
+    <tr>
+        <td> NNI :</td>
+        <td><%= user.NNI %></td>
+      </tr>
+      <tr>
+        <td>  recu number :</td>
+        <td><%= candidatID._id %></td>
+      </tr>
+      <tr>
+        <td> Date de depose :</td>
+        <td> <%= candidatID.time %></td>
+      </tr>
+  </table> 
+  <div>
+    <p>Scan to see your information:</p>
+    <img  class="scan" src="<%= qrCode %>" alt="QR Code">
+</div>
+</center>
+</div>
+    </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depose</title>
+    <link rel="stylesheet" href="depose.css">
+</head>
+<body>
+
+<img src="header.png" alt="">
+<header>
+    <nav class="nav-links" id="nav-links">
+        <ul>
+          <li>		<div class="dropdown">
+            <a class="dropdown-btn"> Welcome,   <%= user.username %>   ▾</a>
+              <div class="dropdown-content">
+                <a href="/deposerequest">Deposes requests</a>
+                <a href="#">Edit profile</a>
+                <a href="/logout">Logout</a>
+              </div>
+          </div>
+          </li>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+       
+        </ul>
+      </nav>
+     <ul class='pc-links'>
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="#">About</a>
+      </li>
+      <li>
+        <a href="#">Contact</a>
+      </li>
+    
+      <li>
+          <div class="dropdown">
+          <button class="dropdown-btn"> Welcome,   <%= user.username %>   ▾</button>
+            <div class="dropdown-content">
+              <a href="/deposerequest">Deposes requests</a>
+              <a href="#">Edit profile</a>
+              <a href="/logout">Logout</a>
+            </div>
+        </div>
+      <li>
+        </ul>
+  </div><button class="menu-btn" id="menu-btn">
+    <div class="line1"></div>
+    <div class="line2"></div>
+    <div class="line3"></div>
+  </button>
+
+
+</header>
+
+
+<% if(finddepose) { %>
+    <h2 class="status">Status : <%= candidatID.stautus %></h2>
+    <h1>Concour: <%= concour %></h1>
+
+    <div class="dejaDepose">
+        <h2> Depose Num : <%= candidatID._id %></h2>
+        <h1>Fichiers requis</h1>
+        <img src="<%= candidatID.carteUrl %>" >
+        <img src="<%= candidatID.bacUrl %>" >
+
+    </div>
+
+    <a href="/recu?concour=<%= concour %> " target="_blank" class="imprimer">impreimer recu</a>
+
+
+<% } else { %>
+
+
+    <h1>Concour: <%= concour %></h1>
+    <form action="/submit" method="POST" enctype="multipart/form-data">
+        <input type="hidden" id="name" name="name" value="<%= user.username %>" required>
+        <input type="hidden" name="concour" value="<%= concour %>">
+        <input type="hidden" name="NNI" value="<%= user.NNI %>">
+        
+        <label for="email">Enter email</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="carte">Carte d'identite:</label>
+        <input type="file" id="carte" name="carte" required>
+
+        <label for="bac">Baccalaureat diplome:</label>
+        <input type="file" id="bac" name="bac" required>
+        
+        <button type="submit">Submit</button>
+    </form>
+
+
+<% } %>
+
+
+    <script src="script.js"></script>
+    </body>
+</html>
+

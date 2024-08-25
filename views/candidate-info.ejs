@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>candidate-info</title>
+    <link rel="stylesheet" href="depose.css">
+</head>
+<body >
+
+<img width="100%" src="header.png" alt="">
+<center>
+    <div class="concour">
+        councour name : <%= candidatsearch.concour %>
+   
+    
+<table>
+  
+    <tr>
+      <td> Name :</td>
+      <td> <%= candidatsearch.name %></td>
+    </tr>
+    <tr>
+        <td> NNI :</td>
+        <td><%= candidatsearch.NNI %></td>
+      </tr>
+      <tr>
+        <td>  recu number :</td>
+        <td><%= candidatsearch._id %></td>
+      </tr>
+      <tr>
+        <td> Date de depose :</td>
+        <td> <%= candidatsearch.time %></td>
+      </tr>
+  </table> 
+</div>
+
+</center>
+
+    <script src="script.js"></script>
+    </body>
+</html>
