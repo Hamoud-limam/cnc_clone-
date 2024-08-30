@@ -9,22 +9,22 @@ import candidat from "./models/candidat.js"
  import multer from 'multer'
  import dotenv from 'dotenv'
  import { v2 as cloudinary } from 'cloudinary';
-  import QRCode  from 'qrcode'
+ import QRCode  from 'qrcode'
+import db from './config.js'
 
  dotenv.config();
 const app = express();
 app.use(express.static('public'))
-mongoose.connect('mongodb://localhost:27017/CNC');
 app.set('view engine','ejs');
 app.use(express.urlencoded({ extended: true }));
 
 
 app.use(session({
-  secret: 'wwj167CRFD$UV&^DFC$WSWJK^^%E%>NCUYiyr3sddfgdf67y8t44468obTFRDAHV,,;,.p2', 
+  secret: process.env.secret, 
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: 'mongodb://localhost:27017/CNC',
+    mongoUrl: process.env.DB_url,
   }),
   cookie: {
     maxAge: 60000*60*24, 
@@ -57,14 +57,14 @@ if (existingUser) {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login'); // Render login page
+  res.render('login'); 
 });
 
 app.post('/login', async (req, res) => {
   const { NNI, password } = req.body;
   const user = await User.findOne({ NNI });
   if (user && await bcrypt.compare(password, user.password)) {
-    req.session.userId = user._id; // Store user id in session
+    req.session.userId = user._id; 
     res.redirect('/');
   } else {
     res.redirect('/login');
@@ -104,7 +104,7 @@ app.get('/recu', isAuthenticated, async (req, res) => {
   
     const finddepose = await candidat.findOne({ concour: concour, NNI: user.NNI });
    const candidatID = await  candidat.findOne({NNI:user.NNI,concour: concour})
-   const qrUrl = `https://bc67-41-188-119-228.ngrok-free.app/recu/${candidatID._id}`;
+   const qrUrl = `${candidatID._id}`;
 
    const qrCode = await QRCode.toDataURL(qrUrl);
       res.render('recu', { user,candidatID, concour,qrCode });
@@ -150,12 +150,11 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// إعداد Multer لرفع الملفات
+
 const storage = multer.diskStorage({});
 const upload = multer({ storage });
 
 
-// إنشاء Schema لمعلومات الطلاب
 
 
 
@@ -163,15 +162,15 @@ const upload = multer({ storage });
 
 app.post('/submit', upload.fields([{ name: 'carte' }, { name: 'bac' }]), async (req, res) => {
   const { name, email,NNI, concour } = req.body;
-  const carteFile = req.files['carte'][0];  // Carte d'identite
-  const bacFile = req.files['bac'][0];      // Baccalaureat diplome
+  const carteFile = req.files['carte'][0];  
+  const bacFile = req.files['bac'][0];     
 
   try {
-    // Upload both files to Cloudinary
+    
     const carteResult = await cloudinary.uploader.upload(carteFile.path);
     const bacResult = await cloudinary.uploader.upload(bacFile.path);
 
-    // Create a new document in the database
+    
     const newCandidate = new candidat({
       name,
       email,
@@ -184,10 +183,10 @@ app.post('/submit', upload.fields([{ name: 'carte' }, { name: 'bac' }]), async (
     });
 
     await newCandidate.save();
-    res.send('تم استلام طلبك بنجاح!');
+    res.redirect('/deposerequest');
   } catch (error) {
     console.error(error);
-    res.status(500).send('حدث خطأ أثناء رفع الملفات.');
+    res.status(500).send('error in server');
   }
 });
 app.get('/deposerequest',isAuthenticated, async(req,res)=>{
