@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv"
 
-const db = mongoose.connect('mongodb://localhost:27017/CNC')
+dotenv.config()
+
+
+const db = mongoose.connect(process.env.DB_url) 
 
 db.then(()=>{
     console.log('connected to db')
