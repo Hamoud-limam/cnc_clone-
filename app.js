@@ -83,7 +83,11 @@ app.get('/depose', isAuthenticated, async (req, res) => {
     const concour = req.query.concour;
     const user = await User.findById(req.session.userId);
 
-  
+   const findCouncour = await concours.findOne({concour:concour,end:'open'})
+   if(!findCouncour){
+    res.render('error')
+    return
+   }
     const finddepose = await candidat.findOne({ concour: concour, NNI: user.NNI });
    const candidatID = await  candidat.findOne({NNI:user.NNI,concour: concour})
     if (finddepose) {
@@ -186,7 +190,7 @@ app.post('/submit', upload.fields([{ name: 'carte' }, { name: 'bac' }]), async (
     res.redirect('/deposerequest');
   } catch (error) {
     console.error(error);
-    res.status(500).send('error in server');
+    res.status(500).send('error iin server');
   }
 });
 app.get('/deposerequest',isAuthenticated, async(req,res)=>{
@@ -203,6 +207,6 @@ app.get('/deposerequest',isAuthenticated, async(req,res)=>{
 
 
 
-app.listen(3000, () => {
+app.listen(4000, () => {
   console.log('Server running on port 3000');
 });
