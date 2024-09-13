@@ -190,7 +190,7 @@ app.post('/submit', upload.fields([{ name: 'carte' }, { name: 'bac' }]), async (
     res.redirect('/deposerequest');
   } catch (error) {
     console.error(error);
-    res.status(500).send('error iin server');
+    res.status(500).send('error in server');
   }
 });
 app.get('/deposerequest',isAuthenticated, async(req,res)=>{
